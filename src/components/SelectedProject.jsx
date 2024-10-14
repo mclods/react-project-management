@@ -1,10 +1,28 @@
+import { useState } from 'react';
 import Button from './common/Button';
 
-function SelectedProject({ selectedProject }) {
+function SelectedProject({ selectedProject, addTask, clearTask }) {
+  const [task, setTask] = useState('');
+
   const getFormattedDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
+
+  const onTaskChange = (event) => {
+    setTask(event.target.value);
+  };
+
+  const onAddTask = () => {
+    if (task) {
+      addTask(selectedProject.id, task);
+      setTask('');
+    }
+  };
+
+  const onClearTask = (taskIndex) => {
+    clearTask(selectedProject.id, taskIndex);
   };
 
   return (
@@ -31,26 +49,39 @@ function SelectedProject({ selectedProject }) {
         <input
           type="text"
           className="w-80 h-10 pl-3 pr-3 bg-stone-200 rounded-sm focus:outline-stone-600 font-poppins text-base font-medium text-stone-700"
+          value={task}
+          onChange={onTaskChange}
         />
-        <Button type="light">Add Task</Button>
+        <Button type="light" onClick={onAddTask}>
+          Add Task
+        </Button>
       </div>
-      <div className="w-full mt-8 mb-8 pl-6 pr-6 pt-7 pb-7 rounded-md bg-stone-100">
-        <ul className="flex flex-col gap-y-3">
-          {['Task 1', 'Task 2'].map((task, index) => (
-            <li className="flex items-center justify-between" key={index}>
-              <p className="font-poppins text-lg font-semibold text-stone-700 ">
-                {task}
-              </p>
-              <Button
-                type="light"
-                styles="text-lg w-20 h-8 text-stone-700 bg-inherit hover:text-red-600 active:text-red-600"
-              >
-                Clear
-              </Button>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {selectedProject.tasks.length > 0 ? (
+        <div className="w-full mt-8 mb-8 pl-6 pr-6 pt-7 pb-7 rounded-md bg-stone-100">
+          <ul className="flex flex-col gap-y-3">
+            {selectedProject.tasks.map((task, index) => (
+              <li className="flex items-center justify-between" key={index}>
+                <p className="font-poppins text-lg font-semibold text-stone-700 ">
+                  {task}
+                </p>
+                <Button
+                  type="light"
+                  styles="text-lg w-20 h-8 text-stone-700 bg-inherit hover:text-red-600 active:text-red-600"
+                  onClick={() => onClearTask(index)}
+                >
+                  Clear
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="w-full mt-8 mb-8">
+          <p className="font-poppins text-lg text-stone-700">
+            No tasks added to this project.
+          </p>
+        </div>
+      )}
     </section>
   );
 }
