@@ -31,6 +31,20 @@ function App() {
     setProjectState('no-project');
   };
 
+  const deleteProject = (projectId) => {
+    setProjects((prevProjects) => {
+      const currentProjects = [
+        ...prevProjects.map((project) => ({
+          ...project,
+          tasks: [...project.tasks],
+        })),
+      ];
+
+      return currentProjects.filter((project) => project.id !== projectId);
+    });
+    setProjectState('no-project');
+  };
+
   const selectProject = (projectId) => {
     setProjects((prevProjects) => {
       return [
@@ -104,6 +118,7 @@ function App() {
     project = (
       <SelectedProject
         selectedProject={selectedProject}
+        deleteProject={deleteProject}
         addTask={addTask}
         clearTask={clearTask}
       />

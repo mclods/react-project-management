@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import Button from './common/Button';
 
-function SelectedProject({ selectedProject, addTask, clearTask }) {
+function SelectedProject({
+  selectedProject,
+  deleteProject,
+  addTask,
+  clearTask,
+}) {
   const [task, setTask] = useState('');
 
   const getFormattedDate = (dateString) => {
     const date = new Date(dateString);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
+
+  const onDeleteProject = () => {
+    deleteProject(selectedProject.id);
   };
 
   const onTaskChange = (event) => {
@@ -31,7 +40,9 @@ function SelectedProject({ selectedProject, addTask, clearTask }) {
         <p className="font-poppins text-4xl font-bold text-stone-700">
           {selectedProject.title}
         </p>
-        <Button type="light">Delete</Button>
+        <Button type="light" onClick={onDeleteProject}>
+          Delete
+        </Button>
       </div>
       <div className="mb-3">
         <p className="font-medium text-xl text-stone-400">
