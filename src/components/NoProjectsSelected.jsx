@@ -13,7 +13,7 @@ function NoProjectsSelected({ openNewProject }) {
         Select a project or get started with a new one
       </p>
       <button
-        className="mx-auto block px-4 py-2 rounded-md text-lg font-normal bg-stone-700 hover:bg-stone-800 active:bg-stone-900 text-stone-400 hover:text-stone-300 active:text-stone-200"
+        className="mx-auto block px-4 py-2 rounded-md text-lg font-poppins font-normal bg-stone-700 hover:bg-stone-800 active:bg-stone-900 text-stone-400 hover:text-stone-300 active:text-stone-200"
         onClick={openNewProject}
       >
         Create new project

@@ -67,29 +67,27 @@ function App() {
   const selectedProject = projects.find((project) => project.selected);
 
   return (
-    <>
-      <main>
-        <Sidebar
-          projects={projects}
-          openNewProject={openNewProject}
-          selectProject={selectProject}
-          clearSelectedProject={clearSelectedProject}
-        />
-        <section className="ml-80 mt-24">
-          {showNewProject ? (
-            <NewProject
-              saveProject={saveProject}
-              cancelProject={closeNewProject}
-            />
-          ) : selectedProject ? (
-            <SelectedProject selectedProject={selectedProject} />
-          ) : (
-            <NoProjectsSelected openNewProject={openNewProject} />
-          )}
-          {}
-        </section>
-      </main>
-    </>
+    <main>
+      <Sidebar
+        projects={projects}
+        openNewProject={openNewProject}
+        selectProject={selectProject}
+        clearSelectedProject={clearSelectedProject}
+      />
+      <section className="ml-80 mt-24">
+        {showNewProject ? (
+          <NewProject
+            saveProject={saveProject}
+            cancelProject={closeNewProject}
+          />
+        ) : selectedProject ? (
+          <SelectedProject selectedProject={selectedProject} />
+        ) : (
+          <NoProjectsSelected openNewProject={openNewProject} />
+        )}
+        {}
+      </section>
+    </main>
   );
 }
 
