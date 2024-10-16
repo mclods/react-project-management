@@ -9,7 +9,7 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [projectState, setProjectState] = useState('no-project');
 
-  // here we always try to update the state by doing deep copy first
+  // here we try to always update the state by doing deep copy first
   const saveProject = (title, description, dueDate) => {
     setProjects((prevProjects) => {
       const newProject = {
