@@ -24,7 +24,7 @@ function NewProject({ saveProject, cancelProject }) {
   };
 
   const onProjectSave = () => {
-    if (title === '' || dueDate === '') {
+    if (title.trim() === '' || dueDate.trim() === '') {
       setErrors({
         title: !title,
         dueDate: !dueDate,

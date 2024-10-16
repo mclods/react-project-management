@@ -23,7 +23,7 @@ function App() {
       return [
         ...prevProjects.map((project) => ({
           ...project,
-          tasks: [...project.tasks],
+          tasks: [...project.tasks.map((task) => ({ ...task }))],
         })),
         newProject,
       ];
@@ -36,7 +36,7 @@ function App() {
       const currentProjects = [
         ...prevProjects.map((project) => ({
           ...project,
-          tasks: [...project.tasks],
+          tasks: [...project.tasks.map((task) => ({ ...task }))],
         })),
       ];
 
@@ -50,7 +50,7 @@ function App() {
       return [
         ...prevProjects.map((project) => ({
           ...project,
-          tasks: [...project.tasks],
+          tasks: [...project.tasks.map((task) => ({ ...task }))],
           selected: project.id === projectId ? true : false,
         })),
       ];
@@ -63,7 +63,7 @@ function App() {
       return [
         ...prevProjects.map((project) => ({
           ...project,
-          tasks: [...project.tasks],
+          tasks: [...project.tasks.map((task) => ({ ...task }))],
           selected: false,
         })),
       ];
@@ -71,15 +71,18 @@ function App() {
     setProjectState('no-project');
   };
 
-  const addTask = (projectId, task) => {
+  const addTask = (projectId, newTask) => {
     setProjects((prevProjects) => {
       return [
         ...prevProjects.map((project) => ({
           ...project,
           tasks:
             project.id === projectId
-              ? [...project.tasks, task]
-              : [...project.tasks],
+              ? [
+                  ...project.tasks.map((task) => ({ ...task })),
+                  { taskName: newTask, id: project.tasks.length },
+                ]
+              : [...project.tasks.map((task) => ({ ...task }))],
         })),
       ];
     });
@@ -92,8 +95,10 @@ function App() {
           ...project,
           tasks:
             project.id === projectId
-              ? project.tasks.filter((task, index) => index !== taskIndex)
-              : [...project.tasks],
+              ? [...project.tasks.map((task) => ({ ...task }))].filter(
+                  (task) => task.id !== taskIndex
+                )
+              : [...project.tasks.map((task) => ({ ...task }))],
         })),
       ];
     });
@@ -109,13 +114,13 @@ function App() {
 
   const selectedProject = projects.find((project) => project.selected);
 
-  let project = <NoProjectsSelected openNewProject={openNewProject} />;
+  let content = <NoProjectsSelected openNewProject={openNewProject} />;
   if (projectState === 'new-project') {
-    project = (
+    content = (
       <NewProject saveProject={saveProject} cancelProject={cancelProject} />
     );
   } else if (projectState === 'selected-project') {
-    project = (
+    content = (
       <SelectedProject
         selectedProject={selectedProject}
         deleteProject={deleteProject}
@@ -133,7 +138,7 @@ function App() {
         selectProject={selectProject}
         clearSelectedProject={clearSelectedProject}
       />
-      <section className="ml-80 mt-24">{project}</section>
+      <section className="ml-80 mt-24">{content}</section>
     </main>
   );
 }
