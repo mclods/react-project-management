@@ -13,7 +13,7 @@ function App() {
   const saveProject = (title, description, dueDate) => {
     setProjects((prevProjects) => {
       const newProject = {
-        id: prevProjects.length,
+        id: Date.now(),
         title,
         description,
         dueDate,
@@ -81,7 +81,7 @@ function App() {
             project.id === projectId
               ? [
                   ...project.tasks.map((task) => ({ ...task })),
-                  { taskName: newTask, id: project.tasks.length },
+                  { taskName: newTask, id: Date.now() },
                 ]
               : [...project.tasks.map((task) => ({ ...task }))],
         })),
