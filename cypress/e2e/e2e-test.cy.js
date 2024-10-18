@@ -81,7 +81,11 @@ describe('React Project Management', () => {
 
   it('Add few tasks', () => {
     // Assert selected project
-    cy.getTestId('select-1').should('have.text', 'Angular Project').click();
+    cy.get('[data-testid="projects-list"] li')
+      .eq(1)
+      .find('button')
+      .should('have.text', 'Angular Project')
+      .click();
     cy.getTestId('project-title').should('have.text', 'Angular Project');
     cy.getTestId('project-due-date').should('have.text', 'Dec 18, 2026');
     cy.getTestId('project-description').should(
@@ -109,7 +113,11 @@ describe('React Project Management', () => {
     cy.getTestId('new-task-input').type('Routing ...');
     cy.getTestId('add-task-btn').click();
 
-    cy.getTestId('select-0').should('have.text', 'React Project').click();
+    cy.get('[data-testid="projects-list"] li')
+      .eq(0)
+      .find('button')
+      .should('have.text', 'React Project')
+      .click();
     cy.getTestId('project-title').should('have.text', 'React Project');
     cy.getTestId('project-due-date').should('have.text', 'Nov 11, 2025');
     cy.getTestId('project-description').should(
@@ -126,7 +134,11 @@ describe('React Project Management', () => {
     cy.getTestId('new-task-input').type('Move to something new');
     cy.getTestId('add-task-btn').click();
 
-    cy.getTestId('select-2').should('have.text', 'Machine Learning').click();
+    cy.get('[data-testid="projects-list"] li')
+      .eq(2)
+      .find('button')
+      .should('have.text', 'Machine Learning')
+      .click();
     cy.getTestId('project-title').should('have.text', 'Machine Learning');
     cy.getTestId('project-due-date').should('have.text', 'Jan 10, 2025');
     cy.getTestId('project-description').should('have.text', '');
@@ -141,7 +153,7 @@ describe('React Project Management', () => {
 
   it('Clear some tasks', () => {
     // Delete few tasks
-    cy.getTestId('select-1').click();
+    cy.get('[data-testid="projects-list"] li').eq(1).find('button').click();
     [
       'Start with the basics.',
       "Let's checkout components",
@@ -189,7 +201,7 @@ describe('React Project Management', () => {
     );
 
     // Edit other projects as well
-    cy.getTestId('select-0').click();
+    cy.get('[data-testid="projects-list"] li').eq(0).find('button').click();
     [
       'Learn hooks.',
       'Work with redux.',
@@ -210,7 +222,7 @@ describe('React Project Management', () => {
       }
     );
 
-    cy.getTestId('select-2').click();
+    cy.get('[data-testid="projects-list"] li').eq(2).find('button').click();
     [
       'Start with statistics... very important!!!',
       'Should also master Python...',
@@ -230,14 +242,14 @@ describe('React Project Management', () => {
 
   it('Delete few projects', () => {
     // Delete projects
-    cy.getTestId('select-1').click();
+    cy.get('[data-testid="projects-list"] li').eq(1).find('button').click();
     cy.getTestId('no-task-header').should(
       'have.text',
       'No tasks added to this project.'
     );
     cy.getTestId('delete-btn').should('have.text', 'Delete').click();
 
-    cy.getTestId('select-1').click();
+    cy.get('[data-testid="projects-list"] li').eq(1).find('button').click();
     ['Should also master Python...'].forEach((taskText, index) => {
       cy.get('[data-testid="tasks-list"] li p')
         .eq(index)
@@ -245,8 +257,7 @@ describe('React Project Management', () => {
     });
     cy.getTestId('delete-btn').should('have.text', 'Delete').click();
 
-    cy.getTestId('select-0').click();
-    cy.get('[data-testid="tasks-list"] li').eq(2).find('button').click();
+    cy.get('[data-testid="projects-list"] li').eq(0).find('button').click();
     ['Learn hooks.', 'Work with redux.', 'Move to something new'].forEach(
       (taskText, index) => {
         cy.get('[data-testid="tasks-list"] li p')

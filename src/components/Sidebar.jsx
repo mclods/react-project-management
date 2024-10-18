@@ -28,7 +28,7 @@ function Sidebar({
           </li>
         </menu>
 
-        <ul className="mt-8">
+        <ul className="mt-8" data-testid="projects-list">
           {projects.map((project) => (
             <li key={project.id} className="my-1 mr-8">
               <button
