@@ -31,8 +31,8 @@ function SelectedProject({
     }
   };
 
-  const onClearTask = (taskIndex) => {
-    clearTask(selectedProject.id, taskIndex);
+  const onClearTask = (taskId) => {
+    clearTask(selectedProject.id, taskId);
   };
 
   return (
