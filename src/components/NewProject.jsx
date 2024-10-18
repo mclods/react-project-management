@@ -50,12 +50,14 @@ function NewProject({ saveProject, cancelProject }) {
   };
 
   return (
-    <section className="pl-10 pr-48">
+    <section className="pl-10 pr-48" data-testid="new-project-section">
       <div className="flex justify-end gap-x-3 mt-2 mb-2">
-        <Button type="light" onClick={onCancel}>
+        <Button type="light" onClick={onCancel} data-testid="cancel-btn">
           Cancel
         </Button>
-        <Button onClick={onProjectSave}>Save</Button>
+        <Button onClick={onProjectSave} data-testid="save-btn">
+          Save
+        </Button>
       </div>
       <div>
         <Input
@@ -64,12 +66,16 @@ function NewProject({ saveProject, cancelProject }) {
           value={title}
           onChange={onTitleChange}
           error={errors.title}
+          id="title-input"
+          data-testid="title-input"
         />
         <Input
           label="Description"
           type="textarea"
           value={description}
           onChange={onDescriptionChange}
+          id="description-input"
+          data-testid="description-input"
         />
         <Input
           label="Due Date *"
@@ -77,6 +83,8 @@ function NewProject({ saveProject, cancelProject }) {
           value={dueDate}
           onChange={onDueDateChange}
           error={errors.dueDate}
+          id="due-date-input"
+          data-testid="due-date-input"
         />
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 
-function Button({ children, type, styles, onClick }) {
+function Button({ children, type, styles, ...props }) {
   let buttonTypeStyles = 'bg-stone-950 text-white';
 
   if (type === 'light') {
@@ -13,7 +13,7 @@ function Button({ children, type, styles, onClick }) {
         `w-24 h-12 rounded-lg font-poppins text-lg font-medium ${buttonTypeStyles}`,
         styles
       )}
-      onClick={onClick}
+      {...props}
     >
       {children}
     </button>
