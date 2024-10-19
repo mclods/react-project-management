@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Button from './common/Button';
 import TasksList from './TasksList';
 import TasksHeader from './TasksHeader';
