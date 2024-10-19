@@ -1,8 +1,23 @@
-# React + Vite
+# React Project Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A project management app made using react.
 
-Currently, two official plugins are available:
+## Install:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+npm install
+```
+
+## Test:
+
+### Cypress Dashboard
+
+```
+npm run cypress
+```
+
+### Cypress Headless
+
+```
+npx cypress run
+```
