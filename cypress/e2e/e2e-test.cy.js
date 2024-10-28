@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 describe('React Project Management', () => {
   it('Start the app', () => {
     cy.visit('/');
